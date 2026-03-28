@@ -179,20 +179,22 @@ ul { list-style: none; }
   position: absolute;
   width: 8px;
   height: 8px;
-  background: var(--terracotta);
+  background: var(--white);
   border-radius: 50%;
   transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
 }
 
 .cursor__ring {
   position: absolute;
   width: 40px;
   height: 40px;
-  border: 1.5px solid var(--terracotta);
+  border: 1.5px solid var(--white);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-  opacity: 0.5;
+  opacity: 0.6;
+  mix-blend-mode: difference;
 }
 
 .cursor.hover .cursor__ring {
@@ -241,10 +243,11 @@ ul { list-style: none; }
 
 .section-title {
   font-family: var(--font-heading);
-  font-size: clamp(1.85rem, 4.5vw, 3rem);
+  font-size: clamp(2.1rem, 5vw, 3.5rem);
   font-weight: 600;
   line-height: 1.25;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   margin-bottom: 3rem;
   color: var(--text-primary);
 }
@@ -628,9 +631,10 @@ ul { list-style: none; }
 
 .service-card__body h3 {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   margin-bottom: 0.5rem;
 }
 
@@ -640,25 +644,9 @@ ul { list-style: none; }
   line-height: 1.6;
 }
 
-.service-card__link {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--terracotta);
-  margin-top: 0.75rem;
-  transition: var(--transition);
-}
-
-.service-card:hover .service-card__link {
-  letter-spacing: 0.15em;
-}
-
-a.service-card {
+div.service-card {
   display: block;
   color: inherit;
-  text-decoration: none;
 }
 
 /* ---------- INDUSTRIES ---------- */
@@ -748,9 +736,10 @@ a.service-card {
 
 .diff-card h3 {
   font-family: var(--font-heading);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   margin-bottom: 0.75rem;
 }
 
@@ -843,9 +832,10 @@ a.service-card {
 
 .portfolio__overlay h4 {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   margin-bottom: 0.25rem;
 }
 
@@ -1388,6 +1378,11 @@ a.service-card {
 .btn--email {
   font-size: 0.75rem;
   letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+.connect__actions .btn--outline {
+  text-transform: none;
 }
 
 /* ---------- ITALIC ACCENTS ---------- */
@@ -1445,7 +1440,7 @@ a.service-card {
   .team { padding: 5rem 0; }
   .connect { padding: 5rem 0; }
 
-  .section-title { font-size: clamp(1.6rem, 4vw, 2.5rem); margin-bottom: 2rem; }
+  .section-title { font-size: clamp(1.8rem, 4.5vw, 2.8rem); margin-bottom: 2rem; }
 }
 
 /* ---------- RESPONSIVE — MOBILE (768px) ---------- */
@@ -1582,7 +1577,7 @@ a.service-card {
 @media (max-width: 480px) {
   .hero__title { font-size: 1.65rem; }
   .hero__subtitle { font-size: 0.9rem; }
-  .section-title { font-size: 1.5rem; }
+  .section-title { font-size: 1.65rem; }
   .section-tag { font-size: 0.85rem; letter-spacing: 0.15em; }
 
   .portfolio__arrow { width: 36px; height: 36px; }
