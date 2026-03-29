@@ -170,9 +170,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       } else if (node.nodeType === Node.ELEMENT_NODE) {
         const tag = node.tagName.toLowerCase();
-        result += `<${tag}>`;
-        node.childNodes.forEach(child => processNode(child));
-        result += `</${tag}>`;
+        if (tag === 'br') {
+          result += '<br>';
+        } else {
+          result += `<${tag}>`;
+          node.childNodes.forEach(child => processNode(child));
+          result += `</${tag}>`;
+        }
       }
     }
 

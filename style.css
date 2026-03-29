@@ -235,21 +235,30 @@ ul { list-style: none; }
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.25em;
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--muted-sage);
   margin-bottom: 1rem;
   position: relative;
 }
 
+.section-tag--upper {
+  text-transform: uppercase;
+}
+
 .section-title {
   font-family: var(--font-heading);
-  font-size: clamp(2.1rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, 5.5vw, 4rem);
   font-weight: 600;
-  line-height: 1.25;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: none;
   margin-bottom: 3rem;
   color: var(--text-primary);
+}
+
+.section-title em {
+  font-style: italic;
+  font-weight: 300;
 }
 
 /* Word animation wrapper */
@@ -477,7 +486,7 @@ ul { list-style: none; }
 }
 
 .hero__title em {
-  font-style: normal;
+  font-style: italic;
   color: var(--toasted-almond);
   font-weight: 300;
 }
@@ -517,6 +526,17 @@ ul { list-style: none; }
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
+}
+
+.mission .section-title {
+  margin-bottom: 1.5rem;
+  line-height: 1.15;
+}
+
+.mission .section-title br {
+  display: block;
+  content: "";
+  margin: 0;
 }
 
 .mission__text {
@@ -633,14 +653,14 @@ ul { list-style: none; }
   font-family: var(--font-heading);
   font-size: 1.15rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  text-transform: none;
   margin-bottom: 0.5rem;
 }
 
 .service-card__body p {
   font-size: 0.875rem;
-  color: var(--text-muted);
+  color: var(--terracotta);
   line-height: 1.6;
 }
 
@@ -738,8 +758,8 @@ div.service-card {
   font-family: var(--font-heading);
   font-size: 1.25rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  text-transform: none;
   margin-bottom: 0.75rem;
 }
 
@@ -1479,7 +1499,7 @@ div.service-card {
   .team { padding: 5rem 0; }
   .connect { padding: 5rem 0; }
 
-  .section-title { font-size: clamp(1.8rem, 4.5vw, 2.8rem); margin-bottom: 2rem; }
+  .section-title { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 2rem; }
 }
 
 /* ---------- RESPONSIVE — MOBILE (768px) ---------- */
@@ -1618,7 +1638,7 @@ div.service-card {
 @media (max-width: 480px) {
   .hero__title { font-size: 1.65rem; }
   .hero__subtitle { font-size: 0.9rem; }
-  .section-title { font-size: 1.65rem; }
+  .section-title { font-size: clamp(1.75rem, 5vw, 2.25rem); }
   .section-tag { font-size: 0.85rem; letter-spacing: 0.15em; }
 
   .portfolio__arrow { width: 36px; height: 36px; }
