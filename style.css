@@ -1680,7 +1680,7 @@ div.service-card {
   .diff-slide { position: relative; opacity: 1; pointer-events: auto; min-height: 70vh; padding: 3rem 5%; }
   .diff-slide__heading { font-size: clamp(1.4rem, 5vw, 2rem); }
   .diff-slide__title { font-size: clamp(1.8rem, 7vw, 2.5rem) !important; }
-  .diff-section__video { display: none; }
+  .diff-section__video { object-position: center center; }
   .diff-section::before { position: relative; }
 
   /* PORTFOLIO */
