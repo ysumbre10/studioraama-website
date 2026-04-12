@@ -271,18 +271,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const diffCounterCur = document.querySelector('.diff-counter__cur');
 
     if (diffSection && diffSlides.length) {
-      const isMobile = window.innerWidth <= 768;
-
-      // On mobile: show all slides stacked, no pinning
-      if (isMobile) {
-        diffSlides.forEach(s => { s.classList.add('is-active'); s.style.position = 'relative'; s.style.opacity = '1'; });
-        if (diffProgressBar) diffProgressBar.parentElement.style.display = 'none';
-        const counter = document.querySelector('.diff-counter');
-        if (counter) counter.style.display = 'none';
-        diffSection.style.height = 'auto';
-      }
-
-      if (isMobile) return; // skip pinning on mobile
 
       let currentDiff = 0;
       const totalSlides = diffSlides.length;

@@ -1684,12 +1684,12 @@ div.service-card {
 
   /* DIFFERENTIATORS */
   .differentiators { padding: 4rem 0; }
-  .diff-section { height: auto; min-height: auto; overflow: hidden; }
   .diff-section__video { display: none; }
   .diff-section::before { background: rgba(20, 16, 12, 0.70); }
-  .diff-slide { position: relative; opacity: 1; pointer-events: auto; min-height: 60svh; min-height: 60vh; padding: 3rem 5%; }
   .diff-slide__heading { font-size: clamp(1.4rem, 5vw, 2rem); }
   .diff-slide__title { font-size: clamp(1.8rem, 7vw, 2.5rem) !important; }
+  /* Reveal: bypass GSAP on mobile — show elements immediately */
+  .reveal { opacity: 1 !important; transform: none !important; }
 
   /* PORTFOLIO */
   .portfolio { padding: 4rem 0 2rem; }
