@@ -1,9 +1,9 @@
 /* ===========================
-   STUDIORAMA — SCRIPT
+   STUDIORAAMA — SCRIPT
    =========================== */
 
 (function() {
-  const saved = localStorage.getItem('studiorama-theme');
+  const saved = localStorage.getItem('studioraama-theme');
   if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
 })();
 
@@ -185,8 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (themeToggle2) {
       themeToggle2.addEventListener('click', () => {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('studiorama-theme', 'light'); }
-        else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('studiorama-theme', 'dark'); }
+        if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('studioraama-theme', 'light'); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('studioraama-theme', 'dark'); }
       });
     }
   }
@@ -425,8 +425,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.getElementById('themeToggle');
   if (themeToggle) themeToggle.addEventListener('click', () => {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('studiorama-theme', 'light'); }
-    else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('studiorama-theme', 'dark'); }
+    if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('studioraama-theme', 'light'); }
+    else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('studioraama-theme', 'dark'); }
   });
 
   // Legacy mobile nav
