@@ -708,13 +708,19 @@ div.service-card {
 }
 
 /* ---------- DIFFERENTIATORS (5-slide pinned fullscreen) ---------- */
+@keyframes diffBgDrift {
+  from { background-position: center 38%; }
+  to   { background-position: center 46%; }
+}
+
 .diff-section {
   position: relative;
   width: 100%;
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
-  background: #1C1714;
+  background: #1C1714 url('/assets/images/homepage.webp') no-repeat center 40% / cover;
+  animation: diffBgDrift 22s ease-in-out infinite alternate;
 }
 
 .diff-section__video {
@@ -1679,10 +1685,11 @@ div.service-card {
   /* DIFFERENTIATORS */
   .differentiators { padding: 4rem 0; }
   .diff-section { height: auto; min-height: auto; overflow: hidden; }
+  .diff-section__video { display: none; }
+  .diff-section::before { background: rgba(20, 16, 12, 0.70); }
   .diff-slide { position: relative; opacity: 1; pointer-events: auto; min-height: 60svh; min-height: 60vh; padding: 3rem 5%; }
   .diff-slide__heading { font-size: clamp(1.4rem, 5vw, 2rem); }
   .diff-slide__title { font-size: clamp(1.8rem, 7vw, 2.5rem) !important; }
-  .diff-section__video { object-position: center center; }
 
   /* PORTFOLIO */
   .portfolio { padding: 4rem 0 2rem; }
