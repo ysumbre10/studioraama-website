@@ -106,7 +106,7 @@ body {
   color: var(--text-primary);
   background: var(--bg-primary);
   line-height: 1.7;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   transition: background 0.5s ease, color 0.5s ease;
 }
@@ -719,7 +719,7 @@ div.service-card {
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
-  background: #1C1714 url('/assets/images/homepage.webp') no-repeat center 40% / cover;
+  background: #1C1714 url('/assets/images/about-statement-bg.webp') no-repeat center 40% / cover;
   animation: diffBgDrift 22s ease-in-out infinite alternate;
 }
 
@@ -1731,3 +1731,20 @@ div.service-card {
   .footer__logo { font-size: 1.15rem; }
   .footer__bottom { font-size: 0.75rem; }
 }
+
+/* ---------- SKIP LINK (accessibility) ---------- */
+.skip-link {
+  position: absolute;
+  top: -200%;
+  left: 1rem;
+  z-index: 100000;
+  background: var(--charcoal, #1C1714);
+  color: var(--cream, #F5F0EB);
+  padding: 0.6rem 1.25rem;
+  border-radius: 0 0 6px 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }

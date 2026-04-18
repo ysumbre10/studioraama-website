@@ -67,9 +67,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isAnimating = false;
     let lastScrollTime = 0;
+    let animatingTimer = null;
+
+    function setAnimating(val) {
+      isAnimating = val;
+      if (animatingTimer) clearTimeout(animatingTimer);
+      if (val) animatingTimer = setTimeout(() => { isAnimating = false; }, 950);
+    }
+
+    // Escape hatch: if the page has scrolled past the hero, reset all locks
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > window.innerHeight * 0.3) {
+        isAnimating = false;
+        lastScrollTime = 0;
+      }
+    }, { passive: true });
 
     heroEl.addEventListener('wheel', (e) => {
-      // Only intercept on desktop when hero is at top of viewport
       if (isTouchDev) return;
       if (window.scrollY > 10) return;
 
@@ -77,37 +91,36 @@ document.addEventListener('DOMContentLoaded', () => {
       const delta = e.deltaY;
       const isDown = delta > 0;
       const isUp = delta < 0;
-      const isLast = heroSwiper.activeIndex === heroSwiper.slides.length - 1;
-      const isFirst = heroSwiper.activeIndex === 0;
+      const isLast = heroSwiper.isEnd;
+      const isFirst = heroSwiper.isBeginning;
 
-      // Throttle to prevent rapid-fire
-      if (now - lastScrollTime < 800 || isAnimating) {
-        // On last slide scrolling down — let page scroll through
-        if (isLast && isDown) return;
-        // On first slide scrolling up — let page scroll through
-        if (isFirst && isUp) return;
+      // Edge cases: release scroll — but Chrome latches the scroll target after
+      // repeated preventDefault calls, so we must kick the page scroll manually.
+      if (isLast && isDown) {
+        if (!isAnimating && now - lastScrollTime >= 750) {
+          lastScrollTime = now;
+          window.scrollBy({ top: 120, behavior: 'instant' });
+        }
+        return;
+      }
+      if (isFirst && isUp) return;
+
+      if (now - lastScrollTime < 750 || isAnimating) {
         e.preventDefault();
         return;
       }
 
       if (isDown && !isLast) {
-        // Advance to next slide
         e.preventDefault();
-        isAnimating = true;
+        setAnimating(true);
         lastScrollTime = now;
         heroSwiper.slideNext();
-        setTimeout(() => { isAnimating = false; }, 900);
-
       } else if (isUp && !isFirst) {
-        // Go back to previous slide
         e.preventDefault();
-        isAnimating = true;
+        setAnimating(true);
         lastScrollTime = now;
         heroSwiper.slidePrev();
-        setTimeout(() => { isAnimating = false; }, 900);
       }
-      // On last slide + scroll down: don't preventDefault — page scrolls naturally
-      // On first slide + scroll up: don't preventDefault — page scrolls naturally
     }, { passive: false });
 
     return heroSwiper;
@@ -127,10 +140,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isOpen) {
         overlay.classList.remove('active');
         btn.classList.remove('active');
+        btn.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
       } else {
         overlay.classList.add('active');
         btn.classList.add('active');
+        btn.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
         gsap.fromTo(links, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out', delay: 0.15 });
         if (footer) gsap.fromTo(footer, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.5 });
@@ -142,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeOverlay() {
       overlay.classList.remove('active');
       btn.classList.remove('active');
+      btn.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     }
 
@@ -419,9 +435,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMenu = document.getElementById('navMenu');
   const navClose = document.getElementById('navClose');
   if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => { navToggle.classList.toggle('active'); navMenu.classList.toggle('open'); });
-    if (navClose) navClose.addEventListener('click', () => { navToggle.classList.remove('active'); navMenu.classList.remove('open'); });
-    document.querySelectorAll('.nav__link').forEach(l => l.addEventListener('click', () => { navToggle.classList.remove('active'); navMenu.classList.remove('open'); }));
+    navToggle.addEventListener('click', () => {
+      const open = navMenu.classList.toggle('open');
+      navToggle.classList.toggle('active');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    if (navClose) navClose.addEventListener('click', () => { navToggle.classList.remove('active'); navMenu.classList.remove('open'); navToggle.setAttribute('aria-expanded', 'false'); });
+    document.querySelectorAll('.nav__link').forEach(l => l.addEventListener('click', () => { navToggle.classList.remove('active'); navMenu.classList.remove('open'); navToggle.setAttribute('aria-expanded', 'false'); }));
   }
 
   // Testimonial carousel
@@ -475,6 +495,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initSectionAnimations();
     initLegacyFeatures();
     ScrollTrigger.refresh();
+
+    // Re-refresh after all images/fonts load so pin positions are accurate
+    window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
   }
 
 });
